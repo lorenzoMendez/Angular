@@ -1,0 +1,111 @@
+
+<div class="elemento-central">
+      <!-- 
+            Formulario de angular
+      -->
+      <div class = "hoja" name="hoja">
+            <img src="../../assets/hoja.png">
+            <p>Green Leaves</p>
+      </div>
+
+      <br>
+
+      <div *ngIf = "!status; then formulario else noFormulario"></div>
+
+      <ng-template #formulario>
+            <form [formGroup] = "perfilForm" (ngSubmit)="onSubmit()">
+                  
+                  <div class="form-group">
+                        <label>Nombre: </label>
+                        <input type="text" formControlName="nombre" class="form-control" [ngClass]="{ 'is-invalid': control && f.nombre.errors }"
+                              pattern = "[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]{3,100}"/>
+                        <span *ngIf = "f.nombre.errors ? validaciones[0]='El nombre no es válido':validaciones[0]=''"></span>
+                        <div *ngIf="control && f.nombre.errors" class="invalid-feedback"></div>
+                  </div><br>
+
+                  <div>
+                        <label>E-mail: </label>
+                        <input type="text" class="form-control" formControlName = "email" [ngClass]="{ 'is-invalid': control && f.email.errors }"
+                              pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"/>
+                        <span *ngIf = "f.email.errors ? validaciones[1]='El correo no es válido':validaciones[1]=''"></span>
+                        <div *ngIf="control && f.email.errors" class="invalid-feedback"></div>
+                  </div><br>
+
+                  <div>
+                        <label>Teléfono: </label>
+                        <input type="text" class="form-control" formControlName = "telefono" [ngClass]="{ 'is-invalid': control && f.telefono.errors }"
+                              pattern = "[#]?[+]?[()0-9- ]{10,}">
+                        <span *ngIf = "f.telefono.errors ? validaciones[2]='El teléfono no es válido':validaciones[2]=''"></span>
+                        <div *ngIf="control && f.telefono.errors" class="form-control" class="invalid-feedback"></div>
+                  </div><br>
+
+                  <div>
+                        <label>Fecha: </label>
+                        <input id = "fechaShow" type="text" class="form-control" formControlName="fecha_formato" >
+                        <input id = "fechaSelect" formControlName="fecha" class="form-control" type="date" [ngClass]="{ 'is-invalid': control && f.fecha_formato.errors }">
+                        <label style="border: none;background: transparent;" for="fechaSelect" (click)="clickCalendario();">📅</label>
+                        <span *ngIf = "checkFecha();"></span>
+                        <span *ngIf = "f.fecha_formato.errors ? validaciones[3]='La fecha no es válida':validaciones[3]=''"></span>
+                        <div *ngIf="control && f.fecha_formato.errors" class="invalid-feedback"></div>
+                  </div><br><br>
+
+                  <div>
+                        <label>Ciudad y estado: </label>
+                        <input list="ciudades_select" class="form-control" type="text" formControlName="ciudad"
+                              [(ngModel)] = "entrada" [ngClass]="{ 'is-invalid': control && f.ciudad.errors }">
+                        <span *ngIf = "entrada.length >= 3 ? check(): false"></span>
+                        <!-- Tiene detallas, carga las coincidencias pero no los muuestra al instante -->
+                        <datalist style="display: none;" id="ciudades_select" name = "ciudades_select">
+                              <option *ngFor="let item of ciudades">{{ item }}</option>
+                        </datalist>
+                        <span *ngIf = "f.ciudad.errors ? validaciones[4]='Ciudad no válida':validaciones[4]=''"></span>
+                        <div *ngIf="control && f.ciudad.errors" class="invalid-feedback"></div>
+                  </div><br>
+
+                  <div class="form-group">
+                        <button id="boton">Enviar</button>
+                  </div>
+            </form>
+      </ng-template>
+
+      <ng-template #noFormulario>
+            <div id = "texto">
+                  <p>Estimado <strong>{{ f.nombre.value }}</strong>,</p>
+                  
+                  <p>Hemos recibido sus datos y nos pondremos en contacto con usted en la brevedad posible.
+                  Enviaremos un correo con información a su cuenta: <a style="color:blue;"><u>{{ f.email.value }}</u></a>.</p>
+                  
+                  <div style="text-align: right;">
+                        <strong>Att.</strong>
+                        <br>
+                        <strong style="color:green;">Green Leaves</strong>
+                        <br>
+                        <i>{{ f.ciudad.value }} a {{ f.fecha_formato.value }}</i>
+                  </div>
+            </div>
+      </ng-template>
+
+      <!-- The Modal -->
+      <div  id="myModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                  <div class="modal-header">
+                        <span id="close">&times;</span>
+                        <h3>Contacto</h3>
+                  </div>
+                  <div class="modal-body">
+                        <p>Se encontraron los siguientes errores en sus datos de contacto:</p>
+                        
+                        <ul>
+                              <li *ngFor="let item of val">{{ item }}</li>
+                        </ul>
+                        
+                        <p>Por favor corrija los errores para continuar</p>
+                  </div>
+                  <div style = "text-align: center;padding-bottom: 10px;">
+                        <button id="button-close" style="color:blue;">Ok</button>
+                  </div>
+            </div>
+      </div>
+
+</div>

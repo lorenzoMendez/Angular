@@ -1,0 +1,170 @@
+.hoja {
+      width: 600px;
+      background: #00FF00;
+      padding: 0px 200px 15px 30px;
+      border-radius: 25px;
+      color: white;
+      font-size: 70px;
+      box-shadow: 5px 5px #888888;
+}
+
+input[ type="text" ] {
+      width: 250px;
+}
+
+.invalid-feedback{
+      display:none;
+      width:100%;
+      margin-top:.25rem;
+      font-size:80%;
+      color:#dc3545
+}
+
+.form-control{
+      display:block;
+      width:250px;
+      height:15px;
+      padding:.375rem .75rem;
+      line-height:1.5;
+      background-color:#fff;
+      background-clip:padding-box;
+      border:1px solid #ced4da;
+      border-radius:.25rem;
+      transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out
+}
+
+.invalid-feedback{
+      display:none;
+      width:100%;
+      margin-top:.25rem;
+      color:#dc3545
+}
+
+.custom-select.is-invalid,.form-control.is-invalid,.was-validated .custom-select:invalid,.was-validated .form-control:invalid{border-color:#dc3545}
+.custom-select.is-invalid:focus,.form-control.is-invalid:focus,.was-validated .custom-select:invalid:focus,.was-validated .form-control:invalid:focus{border-color:#dc3545;box-shadow:0 0 0 .2rem rgba(220,53,69,.25)}
+.custom-select.is-invalid~.invalid-feedback,.custom-select.is-invalid~.invalid-tooltip,.form-control.is-invalid~.invalid-feedback,.form-control.is-invalid~.invalid-tooltip,.was-validated .custom-select:invalid~.invalid-feedback,.was-validated .custom-select:invalid~.invalid-tooltip,.was-validated .form-control:invalid~.invalid-feedback,.was-validated .form-control:invalid~.invalid-tooltip{display:block}
+
+label {
+      width: 10%;
+      float: left;
+}
+
+#boton {
+      color: blue;
+      margin-left: 36.9%;
+}
+
+#fecha2 {
+      width: 0%;
+      display: none;
+}
+
+.elemento-central {
+      width: 800px;
+      margin: 0 auto;
+}
+
+#texto {
+      width: 660px;
+      margin: 0 auto;
+}
+
+img {
+      float: right;
+      width: 150px;
+      position: absolute;
+      margin-left: 600px;
+      -ms-transform: rotate(25deg); /* IE 9 */
+      -webkit-transform: rotate(25deg); /* Safari 3-8 */
+      transform: rotate(25deg);
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 35%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+/* The Close Button */
+#close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+#close:hover,#close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: #BDBDBD;
+    color: black;
+    margin: 5px 5px 5px 5px;
+    border-radius: 5px;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+
+#button-close {
+      width: 50px;
+      height: 25px;
+      text-align: center;
+      display: inline-block;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+}
+
+#fechaShow {
+      width: 14.35%;
+      display:none;
+      float: left;
+}
+
+#fechaSelect {
+      width: 14.35%;
+      float: left;
+}
