@@ -17,6 +17,7 @@ export class GreenLeavesComponent {
       public control: boolean = false;
       public perfilForm: FormGroup;
       public dataJson;
+      public localizacion;
       public validaciones = [ "", "", "", "" ];
       public val: Array<string> = new Array();
       public mes = [ 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
@@ -32,6 +33,20 @@ export class GreenLeavesComponent {
                   fecha: ['', Validators ],
                   fecha_formato: ['', Validators.required ]
             } );
+            
+            this.getLocalizacion();
+      }
+
+      // Obtiene la geolocalizacion del usuario
+      getLocalizacion() {
+            if (navigator.geolocation) {
+                  navigator.geolocation.getCurrentPosition( ( position ) => {
+                  //this.localizacion( position );
+                  console.log( position );
+            });
+            } else {
+                  alert("Geolocation is not supported by this browser.");
+            }
       }
 
       get f() { return this.perfilForm.controls; }
