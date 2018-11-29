@@ -49,19 +49,6 @@
                         <div *ngIf="control && f.fecha_formato.errors" class="invalid-feedback"></div>
                   </div><br><br>
 
-                  <div>
-                        <label>Ciudad y estado: </label>
-                        <input list="ciudades_select" class="form-control" type="text" formControlName="ciudad"
-                              [(ngModel)] = "entrada" [ngClass]="{ 'is-invalid': control && f.ciudad.errors }">
-                        <span *ngIf = "entrada.length >= 3 ? check(): false"></span>
-                        <!-- Tiene detallas, carga las coincidencias pero no los muuestra al instante -->
-                        <datalist style="display: none;" id="ciudades_select" name = "ciudades_select">
-                              <option *ngFor="let item of ciudades">{{ item }}</option>
-                        </datalist>
-                        <span *ngIf = "f.ciudad.errors ? validaciones[4]='Ciudad no válida':validaciones[4]=''"></span>
-                        <div *ngIf="control && f.ciudad.errors" class="invalid-feedback"></div>
-                  </div><br>
-
                   <div class="form-group">
                         <button id="boton">Enviar</button>
                   </div>

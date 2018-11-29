@@ -16,11 +16,8 @@ export class GreenLeavesComponent {
       public status: boolean = false;
       public control: boolean = false;
       public perfilForm: FormGroup;
-      public entrada: string = "";
-      public ciudad: string = "";
-      public ciudades: Array<string> = new Array();
       public dataJson;
-      public validaciones = [ "", "", "", "", ""];
+      public validaciones = [ "", "", "", "" ];
       public val: Array<string> = new Array();
       public mes = [ 'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic' ];
 
@@ -32,8 +29,7 @@ export class GreenLeavesComponent {
                   email: ['', Validators.required ],
                   telefono: ['', Validators.required ],
                   fecha: ['', Validators ],
-                  fecha_formato: ['', Validators.required ],
-                  ciudad: ['', Validators.required ]
+                  fecha_formato: ['', Validators.required ]
             } );
       }
 
@@ -91,7 +87,7 @@ export class GreenLeavesComponent {
       checkErrores(): boolean {
             let i = 0;
             this.val = new Array();
-            for( ; i < 5; ++i ) {
+            for( ; i < 4; ++i ) {
                   if( this.validaciones[ i ] != "" ) {
                         this.status = false;
                         this.val.push( this.validaciones[ i ] );
@@ -132,43 +128,6 @@ export class GreenLeavesComponent {
             window.onclick = function(event) {
                   if (event.target == modal)
                         modal.style.display = "none";
-            }
-      }
-
-      // Comprueba si la entrada tiene mas de 3 caracteres
-      // Trae los datos
-      check() {
-            if( this.entrada != this.ciudad ) {
-                  this.ciudad = this.entrada;
-                  setTimeout( () => {
-                        this.setParametro();
-                        this.getCiudades();
-                  }, 500 );
-            }
-      }
-
-      // Buscar por el parametro de entrada
-      setParametro() {
-            this._rest.setUri( this.ciudad );     
-      }
-      
-      // Obtiene las ciudades desde la API
-      getCiudades() {
-            this._rest.getCity().subscribe( (data:{} ) => {
-                  // Variable data contiene los resultdos
-                  this.dataJson = data;
-                  //console.log( data );
-                  this.setCiudades();
-            } );
-      }
-
-      // Establece con formato las ciudades coincidentes
-      setCiudades() {
-            this.ciudades = new Array();
-            for( var city in this.dataJson[ 'geonames' ] ) {
-                  this.ciudades.push( this.dataJson[ 'geonames' ][ city ][ 'name' ] + ", " +
-                                      this.dataJson[ 'geonames' ][ city ][ 'adminName1' ] + ", " +
-                                      this.dataJson[ 'geonames' ][ city ][ 'countryName' ] );
             }
       }
 }
