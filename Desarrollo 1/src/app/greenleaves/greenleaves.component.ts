@@ -19,7 +19,8 @@ export class GreenLeavesComponent {
       public dataJson;
       public validaciones = [ "", "", "", "" ];
       public val: Array<string> = new Array();
-      public mes = [ 'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic' ];
+      public mes = [ 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                     'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre' ];
 
       constructor( public _rest: RestService, private formBuilder: FormBuilder ) {}
       
@@ -36,15 +37,13 @@ export class GreenLeavesComponent {
       get f() { return this.perfilForm.controls; }
       
       checkFecha() {
-            if( this.perfilForm.get( 'fecha' ).value )
-            {
+            if( this.perfilForm.get( 'fecha' ).value ) {
                   var fechaShow = document.getElementById( "fechaShow" );
                   var fechaSelect = document.getElementById( "fechaSelect" );
                   var aux = this.perfilForm.get( 'fecha' ).value.split( "-" );
 
-                  if( this.validateFecha( aux[ 2 ],aux[ 1 ], aux[ 0 ] ) ){
-
-                        this.perfilForm.get( 'fecha_formato' ).setValue( aux[ 2 ] + "-" + this.mes[ aux[ 1 ] - 1 ] + "-" + aux[ 0 ] );
+                  if( this.validateFecha( aux[ 2 ],aux[ 1 ], aux[ 0 ] ) ) {
+                        this.perfilForm.get( 'fecha_formato' ).setValue( aux[ 2 ] + " de " + this.mes[ aux[ 1 ] - 1 ] + " del " + aux[ 0 ] );
                         // display element
                         fechaShow.style.display = "block";
                         fechaSelect.style.display = "none";
