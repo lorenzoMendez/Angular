@@ -17,7 +17,7 @@
                   
                   <div class="form-group">
                         <label>Nombre: </label>
-                        <input type="text" formControlName="nombre" class="form-control" [ngClass]="{ 'is-invalid': control && f.nombre.errors }"
+                        <input type="text" autofocus formControlName="nombre" class="form-control" [ngClass]="{ 'is-invalid': control && f.nombre.errors }"
                               pattern = "[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]{3,100}"/>
                         <span *ngIf = "f.nombre.errors ? validaciones[0]='El nombre no es válido':validaciones[0]=''"></span>
                         <div *ngIf="control && f.nombre.errors" class="invalid-feedback"></div>
@@ -67,7 +67,11 @@
                         <br>
                         <strong style="color:green;">Green Leaves</strong>
                         <br>
-                        <i>A {{ f.fecha_formato.value }}</i>
+                        <i *ngIf="error.length==0"> {{ clima.name }}, </i>
+                        <i> A {{ f.fecha_formato.value }}</i>
+                        <br>
+                        <i *ngIf="error.length>0">No fue posible obtener el clima por: {{ error }}</i>
+                        <i *ngIf="error.length==0">El clima es : {{ grados }} °C </i>
                   </div>
             </div>
       </ng-template>
@@ -92,6 +96,13 @@
                   <div style = "text-align: center;padding-bottom: 10px;">
                         <button id="button-close" style="color:blue;">Ok</button>
                   </div>
+            </div>
+      </div>
+
+      <div *ngIf = "loading" id = "loading" class="loading-modal">
+            <!-- Modal content -->
+            <div class="loading-content">
+                  <img src="../../assets/loading.gif">
             </div>
       </div>
 

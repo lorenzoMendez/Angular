@@ -9,7 +9,7 @@ import { map, catchError, tap } from 'rxjs/operators';
 
 export class RestService {
       endpoint:string  = 'http://api.geonames.org/searchJSON?name_startsWith=';
-      endpointw: string = 'https://samples.openweathermap.org/data/2.5/weather?';
+      endpointw: string = 'http://api.openweathermap.org/data/2.5/weather?';
       httpOptions = {
         headers: new HttpHeaders( {
           'Content-Type':  'application/json'
@@ -29,15 +29,15 @@ export class RestService {
 
       // Obtiene la lista de ciudades
       getCity(): Observable<any> {
-        return this.http.get( this.endpoint + '&maxRows=10&username=lorenzomendoza' ).pipe(
+        return this.http.get( this.endpoint + '&maxRows=15&username=lorenzomendoza' ).pipe(
           map(this.extractData));
       }
       
       // Regresa el Json con la informacion del clima
       getWeather( lat: number, lon: number ): Observable<any> {
-        return this.http.get( this.endpointw + lat + "&" + lon + "&appid=ceeaf2e0ddc243baacee1c6babfbcf76" )
+        console.log( this.endpointw + "lat=" + lat + "&lon=" + lon + "&appid=ceeaf2e0ddc243baacee1c6babfbcf76" );
+        return this.http.get( this.endpointw + "lat=" + lat + "&lon=" + lon + "&appid=ceeaf2e0ddc243baacee1c6babfbcf76" )
       }
-
       private handleError<T> (operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {
           // TODO: send the error to remote logging infrastructure
