@@ -10,14 +10,16 @@ import { HttpClient, HttpHeaders }from '@angular/common/http';
       selector: 'green-leaves',
       templateUrl: './greenleaves.component.html'
 } )
-
+// API Key
+// &APPID=ceeaf2e0ddc243baacee1c6babfbcf76
 export class GreenLeavesComponent {
       // Estado de la vista
       public status: boolean = false;
       public control: boolean = false;
       public perfilForm: FormGroup;
       public dataJson;
-      public localizacion;
+      public posicion;
+      public error = "";
       public validaciones = [ "", "", "", "" ];
       public val: Array<string> = new Array();
       public mes = [ 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
@@ -33,22 +35,46 @@ export class GreenLeavesComponent {
                   fecha: ['', Validators ],
                   fecha_formato: ['', Validators.required ]
             } );
-            
-            this.getLocalizacion();
+
+           this.getLocalizacion();
       }
 
       // Obtiene la geolocalizacion del usuario
       getLocalizacion() {
             if (navigator.geolocation) {
                   navigator.geolocation.getCurrentPosition( ( position ) => {
-                  //this.localizacion( position );
-                  console.log( position );
-            });
+                        //this.localizacion( position );
+                        this.posicion = { 'lat': position.coords.latitude, 'lon': position.coords.longitude };
+                        console.log( position );
+                  },
+                  ( error ) => {
+                        switch( error.code ) {
+                              case error.PERMISSION_DENIED:
+                                    this.error = "El usuario ha denegado la geolocalización."
+                                    break;
+                              case error.POSITION_UNAVAILABLE:
+                                    this.error = "La ubicacion no es válida."
+                                    break;
+                              case error.TIMEOUT:
+                                    this.error = "Tiempo de respuesta excedido."
+                                    break;
+                              default:
+                                    this.error = "Ocurrio un error desconocido."
+                                    break;
+                        }
+                        console.log( "Error " + this.error );
+                  }, { timeout:5000, enableHighAccuracy: true, maximumAge: 0 }
+            );
             } else {
                   alert("Geolocation is not supported by this browser.");
             }
       }
 
+      showPosition( position ) {
+            console.log( "Aca llegooo" );
+      }
+
+      // Obtiene los constroles del formulario perfilForm
       get f() { return this.perfilForm.controls; }
       
       checkFecha() {
@@ -120,7 +146,7 @@ export class GreenLeavesComponent {
                   return;
             }
 
-            this.status=true; 
+            this.status = true; 
       }
 
       // Muestra el modal con los errores
@@ -128,7 +154,10 @@ export class GreenLeavesComponent {
             var modal = document.getElementById('myModal');
             var span = document.getElementById("close");
             var buttonclose = document.getElementById("button-close");
-            
+
+            // Mostrar el modal
+            modal.style.display = "block";
+
             span.onclick = function() {
                   modal.style.display = "none";
             }
@@ -137,8 +166,7 @@ export class GreenLeavesComponent {
                   modal.style.display = "none";
             }
 
-            modal.style.display = "block";
-
+            // Cerrar modal con clic fuera del elemento
             window.onclick = function(event) {
                   if (event.target == modal)
                         modal.style.display = "none";
